@@ -1,67 +1,67 @@
 "use client";
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 import ButtonHeader from "../shared/ButtonHeader";
 import NavCard from "../shared/NavCard";
-import { cn } from "@/lib/utils";
 
 export interface NavItem {
   icon: React.ReactNode;
   title: string;
   description: string;
 }
+
 const navItemsCardLearn: NavItem[] = [
   {
     icon: (
       <Image
         src="/icons/terminal.svg"
         alt="Terminal Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/graduation-cap.svg"
         alt="Graduation Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/columns-2.svg"
         alt="Columns Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/square-code.svg"
         alt="Square Code Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
 ];
 
@@ -71,92 +71,90 @@ const navItemsCardCommunity: NavItem[] = [
       <Image
         src="/icons/terminal.svg"
         alt="Terminal Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/graduation-cap.svg"
         alt="Graduation Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/columns-2.svg"
         alt="Columns Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
       <Image
         src="/icons/square-code.svg"
         alt="Square Code Icon"
-        width={16}
-        height={16}
+        width={24}
+        height={24}
       />
     ),
     title: "Lorem ipsum dolor",
     description:
-      "Lorem ipsum dolor sit amet consectetur adipisicing elit. Cupiditate obcaecati",
+      "Lorem ipsum dolor sit amet consectetur",
   },
 ];
-const navItems = [{ name: "Learn" }, { name: "Community" }];
 
 const Header = () => {
-  const [isOpenNavCard, setIsOpenNavCard] = React.useState<boolean>(false);
-  const [itemOpen, setItemOpen] = React.useState<string>("");
-  const [prevItemOpen, setPrevItemOpen] = React.useState<string>("");
-  const [isTransitioning, setIsTransitioning] = React.useState(false);
+  const [activeTab, setActiveTab] = useState<null | "Learn" | "Community">(
+    null
+  );
+  const [previousTab, setPreviousTab] = useState<null | "Learn" | "Community">(
+    null
+  );
 
-  const onOpenItemCard = (item: string) => {
-    if (item !== itemOpen) {
-      // Nếu NavCard đang mở => cho phép animate chuyển hướng
-      if (isOpenNavCard) {
-        setPrevItemOpen(itemOpen);
-        setIsTransitioning(true);
-      } else {
-        // Nếu NavCard đang đóng => không animate trái/phải
-        setPrevItemOpen("");
-        setIsTransitioning(false);
-      }
-    }
-    setItemOpen(item);
-    setIsOpenNavCard(true);
+  let timeout: NodeJS.Timeout;
+
+  const handleEnter = (tab: "Learn" | "Community") => {
+    clearTimeout(timeout);
+    setPreviousTab(activeTab);
+    setActiveTab(tab);
   };
 
-  const getSlideDirection = () => {
-    if (!isTransitioning) return null; // không animate nếu không trong quá trình chuyển item
-    const currentIndex = navItems.findIndex((i) => i.name === itemOpen);
-    const prevIndex = navItems.findIndex((i) => i.name === prevItemOpen);
-    return currentIndex > prevIndex ? "right" : "left";
+  const handleLeave = () => {
+    timeout = setTimeout(() => {
+      setActiveTab(null);
+    }, 200); // delay tránh bị tắt liền khi chuyển vùng
   };
 
-  const onCloseItemCard = () => {
-    setIsOpenNavCard(false);
-    setIsTransitioning(false);
-  };
-
+  const getSlideDirection = (
+    previousTab: "Learn" | "Community" | null,
+    nextTab: "Learn" | "Community"
+  ): "left" | "right" | null => {
+    if (!previousTab || previousTab === nextTab) return null;
+  
+    if (previousTab === "Learn" && nextTab === "Community") return "left";
+    if (previousTab === "Community" && nextTab === "Learn") return "right";
+  
+    return null; // fallback
+  }
   return (
-    <div className="w-full max-h-16 flex mx-auto justify-between items-center border-b px-4 md:px-8 lg:px-16 bg-white">
+    <nav className="w-full max-h-24 flex mx-auto justify-between items-center border-b px-4 md:px-8 lg:px-16 bg-white">
       <a className="flex items-center py-4">
         <div className="relative w-32 h-8">
           <Image
@@ -170,35 +168,47 @@ const Header = () => {
       </a>
       <div className="md:hidden">Button mobile</div>
       <div className="hidden md:flex items-center gap-2-3">
-        <ul className="flex relative justify-start items-center list-none flex-1 group">
-          {navItems.map((item, index) => (
-            <li key={index} className="flex items-center relative">
+        <div className="relative">
+          {/* NAVBAR ITEMS */}
+          <ul className="flex gap-2">
+            <li className="cursor-pointer">
               <ButtonHeader
-                content={item.name}
-                className="text-sm font-medium"
-                onOpenItemCard={() => onOpenItemCard(item.name)}
-                onCloseItemCard={onCloseItemCard}
+                content="Learn"
+                itemActive={activeTab}
+                onCloseItemCard={handleLeave}
+                onOpenItemCard={() => handleEnter("Learn")}
               />
             </li>
-          ))}
-          <div
-            className={cn(
-              "absolute right-0 top-10 z-10 w-full min-w-[400px] h-full max-w-[400px] transition-all duration-300 ease-in-out origin-top",
-              "opacity-0 scale-95 pointer-events-none",
-              "group-hover:opacity-100 group-hover:scale-100 group-hover:pointer-events-auto"
-            )}
-          >
-            <NavCard
-              itemOpen={itemOpen}
-              slideDirection={getSlideDirection()}
-              navItemsCardLearn={navItemsCardLearn}
-              navItemsCardCommunity={navItemsCardCommunity}
-            />
-          </div>
-        </ul>
+            <li className="cursor-pointer">
+              <ButtonHeader
+                content="Community"
+                itemActive={activeTab}
+                onCloseItemCard={handleLeave}
+                onOpenItemCard={() => handleEnter("Community")}
+              />
+            </li>
+          </ul>
+
+          {/* DROPDOWN CONTAINER */}
+          {activeTab && (
+            <div
+              className="absolute flex items-center top-full animate-fade-in border right-0 w-[450px] max-w-[450px] h-[450px] max-h-[450px] rounded-lg bg-white  shadow-md z-50"
+              onMouseEnter={() => clearTimeout(timeout)}
+              onMouseLeave={handleLeave}
+            >
+              <NavCard
+                itemOpen={activeTab}
+                slideDirection={getSlideDirection(previousTab, activeTab)}
+                navItemsCardCommunity={navItemsCardCommunity}
+                navItemsCardLearn={navItemsCardLearn}
+              />
+            </div>
+          )}
+        </div>
+
         <div className="flex items-center gap-2"></div>
       </div>
-    </div>
+    </nav>
   );
 };
 

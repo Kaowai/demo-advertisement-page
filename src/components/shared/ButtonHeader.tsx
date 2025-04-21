@@ -3,6 +3,7 @@ import React from "react";
 
 interface IProps {
   content: string;
+  itemActive: "Learn" | "Community" | null;
   className?: string;
   onOpenItemCard: (item: string) => void;
   onCloseItemCard: () => void;
@@ -11,14 +12,17 @@ interface IProps {
 const ButtonHeader = ({
   content,
   className,
+  itemActive,
   onOpenItemCard,
   onCloseItemCard,
 }: IProps) => {
   return (
-    <div className="relative">
+    <div
+      onMouseEnter={() => onOpenItemCard(content)}
+      onMouseLeave={() => onCloseItemCard()}
+      className="relative"
+    >
       <button
-        onMouseEnter={() => onOpenItemCard(content)}
-        onMouseLeave={() => onCloseItemCard()}
         className={cn(
           "group text-black text-sm font-medium transition-color focus:outline-none flex h-10 w-max items-center justify-center px-4 py-2",
           className
@@ -35,7 +39,9 @@ const ButtonHeader = ({
           strokeWidth="1.25"
           strokeLinecap="round"
           strokeLinejoin="round"
-          className="lucide lucide-chevron-down-icon lucide-chevron-down transition-transform duration-200 group-hover:rotate-180"
+          className={`lucide lucide-chevron-down-icon lucide-chevron-down transition-transform duration-200 ${
+            itemActive === content && "rotate-180"
+          }`}
         >
           <path d="m6 9 6 6 6-6" />
         </svg>
