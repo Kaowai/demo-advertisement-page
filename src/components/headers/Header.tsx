@@ -3,6 +3,7 @@ import Image from "next/image";
 import React, { useState } from "react";
 import ButtonHeader from "../shared/ButtonHeader";
 import NavCard from "../shared/NavCard";
+import { cn } from "./../../lib/utils";
 
 export interface NavItem {
   icon: React.ReactNode;
@@ -11,6 +12,11 @@ export interface NavItem {
 }
 
 const navItemsCardLearn: NavItem[] = [
+  {
+    icon: <Image src="/icons/globe.svg" alt="Global" width={24} height={24} />,
+    title: "Lorem ipsum dolor",
+    description: "Lorem ipsum dolor sit amet consectetur",
+  },
   {
     icon: (
       <Image
@@ -21,8 +27,7 @@ const navItemsCardLearn: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -34,8 +39,7 @@ const navItemsCardLearn: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -47,8 +51,7 @@ const navItemsCardLearn: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -60,8 +63,7 @@ const navItemsCardLearn: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
 ];
 
@@ -76,8 +78,7 @@ const navItemsCardCommunity: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -89,8 +90,7 @@ const navItemsCardCommunity: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -102,8 +102,7 @@ const navItemsCardCommunity: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
   {
     icon: (
@@ -115,8 +114,7 @@ const navItemsCardCommunity: NavItem[] = [
       />
     ),
     title: "Lorem ipsum dolor",
-    description:
-      "Lorem ipsum dolor sit amet consectetur",
+    description: "Lorem ipsum dolor sit amet consectetur",
   },
 ];
 
@@ -147,12 +145,12 @@ const Header = () => {
     nextTab: "Learn" | "Community"
   ): "left" | "right" | null => {
     if (!previousTab || previousTab === nextTab) return null;
-  
+
     if (previousTab === "Learn" && nextTab === "Community") return "left";
     if (previousTab === "Community" && nextTab === "Learn") return "right";
-  
+
     return null; // fallback
-  }
+  };
   return (
     <nav className="w-full max-h-24 flex mx-auto justify-between items-center border-b px-4 md:px-8 lg:px-16 bg-white">
       <a className="flex items-center py-4">
@@ -192,7 +190,10 @@ const Header = () => {
           {/* DROPDOWN CONTAINER */}
           {activeTab && (
             <div
-              className="absolute flex items-center top-full animate-fade-in border right-0 w-[450px] max-w-[450px] h-[450px] max-h-[450px] rounded-lg bg-white  shadow-md z-50"
+              className={cn(
+                "absolute flex items-center top-full transition-opacity duration-200 right-0 bg-white z-50",
+                activeTab ? "opacity-100 scale-100" : "opacity-0 scale-95"
+              )}
               onMouseEnter={() => clearTimeout(timeout)}
               onMouseLeave={handleLeave}
             >

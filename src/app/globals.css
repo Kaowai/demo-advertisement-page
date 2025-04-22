@@ -133,28 +133,6 @@ body {
   }
 }
 
-@keyframes fadeInRight {
-  0% {
-    opacity: 0;
-    transform: translateX(400px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-@keyframes fadeInLeft {
-  0% {
-    opacity: 0;
-    transform: translateX(-400px);
-  }
-  100% {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -167,13 +145,5 @@ body {
 }
 
 .animate-fade-in {
-  animation: fadeIn 0.3s ease forwards;
-}
-
-.animate-fade-in-right {
-  animation: fadeInRight 0.2s ease forwards;
-}
-
-.animate-fade-in-left {
-  animation: fadeInLeft 0.2s ease forwards;
+  animation: fadeIn 0.5s ease forwards;
 }
