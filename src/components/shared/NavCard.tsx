@@ -152,7 +152,7 @@ export default function NavCard({
             </ul>
           </div>
           <div className="basis-[45%] text-neutral-500 p-7 bg-[#E82840] flex flex-col gap-2">
-            <span className="text-base font-medium text-white">SOCIAL</span>
+            <span className="text-base font-medium text-white">SOCIALS</span>
             <div className="grid grid-cols-2 grid-rows-3 gap-2">
               {socialList.map((item, idx) => (
                 <SocialItem

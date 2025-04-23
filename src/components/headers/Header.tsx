@@ -152,7 +152,7 @@ const Header = () => {
     return null; // fallback
   };
   return (
-    <nav className="w-full max-h-24 flex mx-auto justify-between items-center border-b px-4 md:px-8 lg:px-16 bg-white">
+    <nav className="w-full fixed max-h-24 flex mx-auto justify-between items-center border-b px-4 md:px-8 lg:px-16  z-50">
       <a className="flex items-center py-4">
         <div className="relative w-32 h-8">
           <Image

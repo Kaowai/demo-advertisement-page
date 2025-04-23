@@ -43,13 +43,13 @@
   --radius-xl: calc(var(--radius) + 4px);
 }
 
-body {
+body,
+html {
   margin: 0;
   padding: 0;
   height: 100%;
   width: 100%;
-  overflow: hidden;
-  font-family: "Manrope", sans-serif;
+  font-family: "DM Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: 400;
   font-style: normal;
@@ -131,6 +131,86 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  .heading-xxl {
+    font-size: 88px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 96.8px */
+    letter-spacing: -0.88px;
+  }
+
+  .heading-xs {
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 110%; /* 26.4px */
+    letter-spacing: -0.24px;
+  }
+
+  .heading-m {
+    font-size: 48px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 120%; /* 57.6px */
+  }
+
+  .heading-s {
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 120%; /* 38.4px */
+    letter-spacing: -0.32px;
+  }
+
+  .label-xl {
+    /* Label/Label XL */
+    font-size: 24px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 32px; /* 133.333% */
+    letter-spacing: -0.24px;
+  }
+
+  .label-l {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+  }
+
+  .label-s {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+  }
+
+  .body-s {
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 20px; /* 142.857% */
+    letter-spacing: -0.14px;
+  }
+
+  .body-l {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+  }
+
+  .button-m {
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 150% */
+    letter-spacing: -0.16px;
+  }
 }
 
 @keyframes fadeIn {
@@ -146,4 +226,25 @@ body {
 
 .animate-fade-in {
   animation: fadeIn 0.5s ease forwards;
+}
+
+.scroll-container {
+  height: 100vh;
+  overflow-y: scroll;
+  scrollbar-width: none;
+}
+
+.scroll-container::-webkit-scrollbar {
+  display: none;
+}
+
+.scroll-text {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+
+.scroll-text.revealed {
+  opacity: 1;
+  transform: translateY(0);
 }
