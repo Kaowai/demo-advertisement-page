@@ -1,12 +1,21 @@
 import Image from "next/image";
 import React from "react";
 import CountDownWrapper from "../shared/CountDownWrapper";
+import { cn } from "@/lib/utils";
 
-const AboveHeader = () => {
+interface AboveHeaderProps {
+  isVisible: boolean;
+}
+
+const AboveHeader = ({ isVisible }: AboveHeaderProps) => {
   return (
     <div
-      className="flex px-20 py-2 flex-col justify-center items-center gap-2 self-stretch 
-    bg-gradient-to-r from-[#16C3E8] via-[#064099] to-[#010412]"
+      className={cn(
+        "flex px-20 py-2 flex-col justify-center items-center gap-2 self-stretch",
+        "bg-gradient-to-r from-[#16C3E8] via-[#064099] to-[#010412]",
+        "transition-transform duration-300",
+        isVisible ? "translate-y-0" : "-translate-y-full"
+      )}
     >
       <div className="flex justify-between items-center self-stretch">
         <div className="flex items-center gap-6">

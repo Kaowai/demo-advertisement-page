@@ -204,6 +204,14 @@ html {
     letter-spacing: -0.18px;
   }
 
+  .button-l {
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 24px; /* 133.333% */
+    letter-spacing: -0.18px;
+  }
+
   .button-m {
     font-size: 16px;
     font-style: normal;
