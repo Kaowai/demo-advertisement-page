@@ -1,8 +1,9 @@
 "use client";
 import Image from "next/image";
 import React from "react";
-import ItemNavHeader from "../shared/ItemNavHeader";
+import ScrollText from "../shared/ScrollText";
 import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 const ItemsNavHeader = [
   { content: "About us", href: "#" },
@@ -17,7 +18,7 @@ interface MainHeaderProps {
 
 const MainHeader = ({ isAboveHeaderVisible }: MainHeaderProps) => {
   return (
-    <nav 
+    <nav
       className={cn(
         "w-full fixed top-0 max-h-24 flex mx-auto justify-between items-center px-20 py-4 bg-[#0D0D0D]/32 backdrop-sepia-[52px] z-40 transition-transform duration-300",
         isAboveHeaderVisible ? "translate-y-9" : "translate-y-0"
@@ -37,15 +38,17 @@ const MainHeader = ({ isAboveHeaderVisible }: MainHeaderProps) => {
         {/* NAVBAR ITEMS */}
         <ul className="flex gap-10 items-center">
           {ItemsNavHeader.map((item, index) => (
-            <li key={index} className="cursor-default">
-              <ItemNavHeader content={item.content} href={item.href} />
+            <li key={index} className="text-white label-l overflow-y-hidden">
+              <Link className="" href={item.href}>
+                <ScrollText label={item.content} />
+              </Link>
             </li>
           ))}
           <li>
             <button
               className="flex text-[#F7F7F7] text-center pl-[18px] py-3 pr-5 items-center justify-center gap-[10px]
               hover:bg-[#E82840] hover:border-[#E82840] transition duration-300 ease-in-out
-              border-[1.5px] border-[#F7F7F7] rounded-full cursor-pointer group"
+              border-[1.5px] border-[#F7F7F7] rounded-full cursor-pointer group button-m"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -64,7 +67,7 @@ const MainHeader = ({ isAboveHeaderVisible }: MainHeaderProps) => {
                 <rect width="18" height="18" x="3" y="4" rx="2" />
                 <path d="M3 10h18" />
               </svg>
-              <ItemNavHeader content="All Events" href="#" classNameLabel="button-m"/>
+              <ScrollText label="All Events" />
             </button>
           </li>
         </ul>

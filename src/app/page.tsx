@@ -1,12 +1,20 @@
 "use client";
 import Footer from "@/components/footers/Footer";
 import Header2 from "@/components/headers/Header2";
-import ItemNavHeader from "@/components/shared/ItemNavHeader";
+import ItemNavHeader from "@/components/shared/ScrollText";
 import Image from "next/image";
+import { DM_Sans } from "next/font/google";
+import { cn } from "@/lib/utils";
+import ScrollText from "@/components/shared/ScrollText";
+
+const dmSans = DM_Sans({
+  variable: "--font-geist-mono",
+  subsets: ["latin"],
+});
 
 export default function Home() {
   return (
-    <div className="overflow-auto bg-black">
+    <div className={cn("overflow-auto bg-black", dmSans.className)}>
       <Header2 />
       <section
         id="section-header"
@@ -85,10 +93,9 @@ export default function Home() {
                 className="fill-current text-[#F7F7F7] group-hover:text-[#0D0D0D]"
               />
             </svg>
-            <ItemNavHeader
-              content="Get your ticket"
-              href="#"
-              classNameLabel="button-l group-hover:text-[#0D0D0D]"
+            <ScrollText
+              label="Get your ticket"
+              className="button-l group-hover:text-[#0D0D0D]"
             />
           </button>
         </div>
